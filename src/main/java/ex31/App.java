@@ -9,6 +9,30 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class App {
+
+    public static void heartRateTable(int ageNUM, int restingHRNUM) {
+        //using for loop, compute the target heart rate
+        System.out.println    ("INTENSITY        | RATE    ");
+        System.out.println    ("-----------------|---------");
+        for(int i=55; i<=95; i = i+5) {
+            double intensity = (double)i /100;
+            double TargetHeartRate = ((((220 - ageNUM) - restingHRNUM) * intensity) + restingHRNUM);
+            System.out.println(i+"%              | " + String.format("%.0f", TargetHeartRate) + " bpm" );
+        }
+    }
+
+    public static boolean validInput(String input) {
+        Pattern p = Pattern.compile("^[0-9]*$");
+        Matcher m = p.matcher(input);
+
+        if(!m.find()) {
+            System.out.println("Invalid Input");
+            return false;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Pattern p = Pattern.compile("^[0-9]*$");
@@ -23,9 +47,7 @@ public class App {
         while(true) {
             System.out.println("What is your resting pulse?");
             restingHR = scan.nextLine();
-            Matcher m = p.matcher(restingHR);
-            if(!m.find()) System.out.println("Invalid Input");
-            else {
+            if(validInput(restingHR)) {
                 restingHRNUM = Integer.parseInt(restingHR);
                 break;
             }
@@ -35,23 +57,12 @@ public class App {
         while(true) {
             System.out.println("What is your age?");
             age = scan.nextLine();
-            Matcher m1 = p.matcher(age);
-            if(!m1.find()) System.out.println("Invalid Input");
-            else {
+            if(validInput(age)) {
                 ageNUM = Integer.parseInt(age);
                 break;
             }
         }
-
-        //using for loop, compute the target heart rate
-        System.out.println    ("INTENSITY        | RATE    ");
-        System.out.println    ("-----------------|---------");
-
-        for(int i=55; i<=95; i = i+5) {
-            double intensity = (double)i /100;
-            double TargetHeartRate = ((((220 - ageNUM) - restingHRNUM) * intensity) + restingHRNUM);
-            System.out.println(i+"%              | " + String.format("%.0f", TargetHeartRate) + " bpm" );
-        }
-
+        //print out heartRateTable
+        heartRateTable(ageNUM, restingHRNUM);
     }
 }

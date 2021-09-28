@@ -8,34 +8,50 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
+    public static String askQuestion(int Random) {
+        String answer = null;
+
+        switch (Random) {
+            case 1 :
+                answer = ("Yes");
+                break;
+
+            case 2 :
+                answer = ("No");
+                break;
+
+            case 3 :
+                answer = ("Maybe");
+                break;
+
+            case 4 :
+                answer = ("Ask again later.");
+                break;
+        }
+        return answer;
+    }
+
+    public static int randomNum() {
         //make scanner and random number
         int max = 4;
         int min = 1;
-        Scanner scan = new Scanner(System.in);
         int Random = new Random().nextInt(max - min + 1) + min;
+        return Random;
+    }
 
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+        //call random and print out answer
+        int Random = randomNum();
         //prompt for question
         System.out.println("What is your question?");
         String question = scan.nextLine();
 
-        //print out case
-        switch (Random) {
-            case 1 :
-                System.out.println("Yes");
-                break;
+        String answer = askQuestion(Random);
 
-            case 2 :
-                System.out.println("No");
-                break;
+        //print out answer
+        System.out.println(answer);
 
-            case 3 :
-                System.out.println("Maybe");
-                break;
-
-            case 4 :
-                System.out.println("Ask again later.");
-                break;
-        }
     }
 }

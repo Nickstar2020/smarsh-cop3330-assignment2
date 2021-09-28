@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class App {
-    public static void main(String[] args) {
+    public static String pickWinner() {
         Scanner scan = new Scanner(System.in);
         String input = null;
         int count = 0;
@@ -31,7 +31,11 @@ public class App {
         //generate random number based on how many numbers were inputted
         random = new Random().nextInt(count-1);
 
+        return names.get(random);
+    }
+
+    public static void main(String[] args) {
         //print winner
-        System.out.println("The winner is " + names.get(random));
+        System.out.println("The winner is " + pickWinner());
     }
 }

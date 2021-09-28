@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class App {
-    public static void main(String[] args) {
+    public static void numberGuessingGame() {
         Scanner scan = new Scanner(System.in);
         int min = 1;
         String guess = null;
@@ -25,7 +25,7 @@ public class App {
         Pattern p1 = Pattern.compile("^[1]$|^[2]$|^[3]$");
 
         //print out asking for difficulty and check if input is valid
-            System.out.println("Let's play Guess the Number!\n");
+        System.out.println("Let's play Guess the Number!\n");
         while(true) {
             System.out.println("Enter the difficulty level (1, 2, or 3)");
             String difficulty = scan.nextLine();
@@ -51,40 +51,45 @@ public class App {
             Random = new Random().nextInt(Max - min + 1) + min;
         }
 
-            //ask for guess and ensure guess is valid input
+        //ask for guess and ensure guess is valid input
 
-            System.out.println("I have my number. What is your guess?");
+        System.out.println("I have my number. What is your guess?");
+        guess = scan.nextLine();
+        Matcher m = p.matcher(guess);
+        if(m.find()) {
+            guessNum = Integer.parseInt(guess);
+        } else {
+            System.out.println("Invalid input please use numbers. (warning, invalid input also counts towards guesses)");
+            guesses++;
+            //this is here, so it doesn't say "too low" or "too high" for an invalid guess
+            IncorrectGuess = true;
+        }
+
+        while(guessNum != Random) {
+            if(IncorrectGuess) {
+                System.out.println("Guess again");
+                IncorrectGuess = false;
+            } else if (guessNum > Random) {
+                System.out.println("Too high. Guess again:");
+            } else {
+                System.out.println("Too low. Guess again");
+            }
+            //re-ask and re-validate
             guess = scan.nextLine();
-            Matcher m = p.matcher(guess);
+            m = p.matcher(guess);
             if(m.find()) {
                 guessNum = Integer.parseInt(guess);
             } else {
                 System.out.println("Invalid input please use numbers. (warning, invalid input also counts towards guesses)");
-                guesses++;
-                //this is here, so it doesn't say "too low" or "too high" for an invalid guess
                 IncorrectGuess = true;
             }
+            guesses++;
+        }
+        System.out.println("You got it in " + guesses + " guesses!");
+    }
 
-            while(guessNum != Random) {
-                if(IncorrectGuess) {
-                    System.out.println("Guess again");
-                    IncorrectGuess = false;
-                } else if (guessNum > Random) {
-                    System.out.println("Too high. Guess again:");
-                } else {
-                    System.out.println("Too low. Guess again");
-                }
-                //re-ask and re-validate
-                guess = scan.nextLine();
-                m = p.matcher(guess);
-                if(m.find()) {
-                    guessNum = Integer.parseInt(guess);
-                } else {
-                    System.out.println("Invalid input please use numbers. (warning, invalid input also counts towards guesses)");
-                    IncorrectGuess = true;
-                }
-                guesses++;
-            }
-            System.out.println("You got it in " + guesses + " guesses!");
+    public static void main(String[] args) {
+        //call the guessing game
+        numberGuessingGame();
     }
 }

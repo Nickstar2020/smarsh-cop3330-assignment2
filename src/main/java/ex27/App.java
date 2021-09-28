@@ -71,7 +71,7 @@ public class App {
 
     public static boolean validateInput(boolean fN, boolean lN, boolean zC, boolean ID) {
         //if everything checks out return no error statement
-        if( fN && lN && zC && ID) return true;
+        if(fN && lN && zC && ID) return true;
 
         return false;
     }

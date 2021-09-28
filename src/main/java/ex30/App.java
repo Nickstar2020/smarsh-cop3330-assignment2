@@ -6,7 +6,7 @@
 package ex30;
 
 public class App {
-    public static void main(String[] args) {
+    public static void printTable() {
         //need a nested for loop
         for (int y=1; y < 12; y++) {
             for (int x=1; x<12; x++) {
@@ -15,5 +15,9 @@ public class App {
             }
             System.out.println();
         }
+    }
+
+    public static void main(String[] args) {
+        printTable();
     }
 }

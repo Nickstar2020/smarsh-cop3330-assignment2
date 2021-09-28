@@ -8,6 +8,11 @@ import java.util.Scanner;
 import java.util.regex.*;
 
 public class App {
+
+    public static double yearsToDouble(double r) {
+        return (72 / r) ;
+    }
+
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
@@ -28,7 +33,7 @@ public class App {
                     System.out.println("Sorry, that is not a valid input.");
                     continue;
                 } else {
-                    double years = 72 / r;
+                    double years = yearsToDouble(r);
 
                     System.out.println("It will take " + (int)years + " years to double your initial investment.");
 

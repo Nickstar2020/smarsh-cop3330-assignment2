@@ -21,6 +21,30 @@ public class App {
         return newShuffledPass;
     }
 
+    public static void printMultiplePasswords(int minLength, int specialChars, int numbers, List<Character> alphabetList, List<Character> specialList, List<Character> numbersList) {
+
+        for(int i=0; i<5; i++) {
+            //randomly generate each letter/number/special character
+            StringBuilder password = new StringBuilder("");
+
+            for(int j=0; j<minLength; j++) {
+                int random = new Random().nextInt(alphabetList.size()-1);
+                password.append(alphabetList.get(random));
+            }
+            for(int j=0; j<specialChars; j++) {
+                int random = new Random().nextInt(specialList.size()-1);
+                password.append(specialList.get(random));
+            }
+            for(int j=0; j<numbers; j++) {
+                int random = new Random().nextInt(numbersList.size()-1);
+                password.append(numbersList.get(random));
+            }
+            //shuffles password around
+            String notShuffledPassword = password.toString();
+            System.out.println(shufflePassword(notShuffledPassword));
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
@@ -61,25 +85,6 @@ public class App {
 
         //print out password (also 1 challenge: print multiple passwords)
         System.out.println("Here are 5 passwords to choose from!");
-        for(int i=0; i<5; i++) {
-            //randomly generate each letter/number/special character
-            StringBuilder password = new StringBuilder("");
-
-            for(int j=0; j<minLength; j++) {
-                int random = new Random().nextInt(alphabetList.size()-1);
-                password.append(alphabetList.get(random));
-            }
-            for(int j=0; j<specialChars; j++) {
-                int random = new Random().nextInt(specialList.size()-1);
-                password.append(specialList.get(random));
-            }
-            for(int j=0; j<numbers; j++) {
-                int random = new Random().nextInt(numbersList.size()-1);
-                password.append(numbersList.get(random));
-            }
-            //shuffles password around
-            String notShuffledPassword = password.toString();
-            System.out.println(shufflePassword(notShuffledPassword));
-        }
+       printMultiplePasswords(minLength, specialChars, numbers, alphabetList, numbersList, specialList);
     }
 }
